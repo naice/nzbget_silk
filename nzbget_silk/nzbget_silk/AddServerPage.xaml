@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="nzbget_silk.AddServerPage" Title="{Binding Title}">
+    <StackLayout Orientation="Vertical" Margin="10">
+
+        <StackLayout Orientation="Vertical">
+            <Entry Text="{Binding Domain}" Placeholder="Domain" Keyboard="Url"/>
+            <Entry Text="{Binding Port}" Placeholder="Port" Keyboard="Numeric"/>
+            <Entry Text="{Binding Username}" Placeholder="Username"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="{Binding IsPasswordView}" HorizontalOptions="Fill" />
+                <Switch IsToggled="{Binding IsPasswordView}" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <Button Text="Connect" IsEnabled="{Binding IsConnectButtonEnabled}" Clicked="Connect_Clicked"/>
+            <Button Text="Abort" IsVisible="{Binding IsAbortButtonVisible}" />
+        </StackLayout>
+
+        <Label Margin="0,10,0,0" FontSize="Small" TextColor="Gray" Text="Connect to your NZBGet Server. Please provide the Domain without http, default Port is 6789."/>
+    </StackLayout>
+</ContentPage>

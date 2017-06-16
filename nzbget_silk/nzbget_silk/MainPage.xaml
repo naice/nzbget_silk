@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:nzbget_silk"
+             xmlns:controls="clr-namespace:nzbget_silk.Controls"
+             xmlns:vm="clr-namespace:nzbget_silk.ViewModel"
+             x:Class="nzbget_silk.MainPage" Title="{Binding Title}" Appearing="ContentPage_Appearing" Disappearing="ContentPage_Disappearing">
+
+    <ScrollView>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Vertical" Margin="{DynamicResource MediumSpacing}">
+                <Label Text="{Binding Name}" Style="{DynamicResource ListItemDetailValueTextStyle}"
+                       HorizontalOptions="Center" IsVisible="{Binding IsNameVisible}" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Domain" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                    <Label Text="{Binding ServerDomain}" Style="{DynamicResource ListItemDetailValueTextStyle}"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Download" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                    <Label Text="{Binding TotalDownloadProgressText}" Style="{DynamicResource ListItemDetailValueTextStyle}"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <ProgressBar Progress="{Binding TotalDownloadProgress}" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Limit" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                    <Label Text="{Binding DownloadLimitText}" Style="{DynamicResource ListItemDetailValueTextStyle}"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Speed" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                    <Label Text="{Binding DownloadSpeedText}" Style="{DynamicResource ListItemDetailValueTextStyle}"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Free Disk Space" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                    <Label Text="{Binding FreeDiskSpaceText}" Style="{DynamicResource ListItemDetailValueTextStyle}"
+                                               HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <Button Text="{Binding ToggleDownloadButtonText}" Command="{Binding ToggleDownloadButtonCommand}"/>
+            </StackLayout>
+            <controls:SectionDivider/>
+            <controls:RepeaterView  x:TypeArguments="vm:NZBGroupViewModel"
+                                    ItemsSource="{Binding Groups}">
+                <controls:RepeaterView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal" Margin="{DynamicResource MediumSpacing}">
+                                <Image Source="{Binding StatusImageSource}" VerticalOptions="Center"/>
+                                <StackLayout Orientation="Vertical" Margin="8,0,0,0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Download" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                                        <Label Text="{Binding TotalSizeText}" Style="{DynamicResource ListItemDetailValueTextStyle}"
+                                               HorizontalOptions="EndAndExpand"/>
+                                    </StackLayout>
+                                    <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding IsProgressVisible}"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <controls:SectionDivider/>
+                        </StackLayout>
+                    </DataTemplate>
+                </controls:RepeaterView.ItemTemplate>
+                
+            </controls:RepeaterView>
+            <BoxView HeightRequest="20" MinimumHeightRequest="20" />
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

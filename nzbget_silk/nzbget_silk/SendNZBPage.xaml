@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="nzbget_silk.SendNZBPage" Title="{Binding Title}">
+    <StackLayout Margin="10" Orientation="Vertical">
+
+        <Label Text="{Binding Description}" FontSize="Small" TextColor="Gray"/>
+        <Button Text="Send" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Send_Clicked"/>
+        <ActivityIndicator IsRunning="True" IsVisible="{Binding IsIndicatorVisible}"
+                           HorizontalOptions="Center" VerticalOptions="Center"/>
+
+
+    </StackLayout>
+</ContentPage>
