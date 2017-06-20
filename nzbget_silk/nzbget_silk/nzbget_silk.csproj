@@ -72,6 +72,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\AddServerViewModel.cs" />
+    <Compile Include="ViewModel\Navigator.cs" />
     <Compile Include="ViewModel\NZBGroupViewModel.cs" />
     <Compile Include="ViewModel\PageViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace nzbget_silk.ViewModel
 {
-    public class NZBGetServerViewModel : PageViewModel
+    public class AddServerViewModel : PageViewModel
     {
         private string _Domain;
         public string Domain
@@ -101,20 +101,48 @@ namespace nzbget_silk.ViewModel
                 }
             }
         }
+        private RelayCommand _ConnectCommand;
+        public RelayCommand ConnectCommand
+        {
+            get { return _ConnectCommand; }
+            set
+            {
+                if (value != _ConnectCommand)
+                {
+                    _ConnectCommand = value;
+                    RaisePropertyChanged(nameof(ConnectCommand));
+                }
+            }
+        }
+        private RelayCommand _AbortCommand;
+        public RelayCommand AbortCommand
+        {
+            get { return _AbortCommand; }
+            set
+            {
+                if (value != _AbortCommand)
+                {
+                    _AbortCommand = value;
+                    RaisePropertyChanged(nameof(AbortCommand));
+                }
+            }
+        }
 
-        public Model.NZBGetServer CreateServer => new Model.NZBGetServer()
+        private Model.NZBGetServer CreateServer => new Model.NZBGetServer()
         {
             Domain = Domain, Password = Password, Port = Port, Username = Username,
         };
 
         private readonly Model.NZBGetServer _server;
+        private readonly Action<Model.NZBGetServer> _serverCreatedCallback;
 
-        public NZBGetServerViewModel(bool forceCreate, Model.NZBGetServer server)
+        public AddServerViewModel(bool forceCreate, Model.NZBGetServer server, Action<Model.NZBGetServer> serverCreatedCallback)
         {
             Title = "Connect";
 
             IsAbortButtonVisible = forceCreate == false;
             _server = server;
+            _serverCreatedCallback = serverCreatedCallback;
 
             if (server != null)
             {

@@ -16,8 +16,8 @@
                     <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="{Binding IsPasswordView}" HorizontalOptions="FillAndExpand" />
                     <Switch IsToggled="{Binding IsPasswordView}" HorizontalOptions="End"/>
                 </StackLayout>
-                <Button Text="Connect" IsEnabled="{Binding IsConnectButtonEnabled}" Clicked="Connect_Clicked"/>
-                <Button Text="Abort" IsVisible="{Binding IsAbortButtonVisible}" />
+                <Button Text="Connect" IsEnabled="{Binding IsConnectButtonEnabled}" Command="{Binding ConnectCommand}"/>
+                <Button Text="Abort" IsVisible="{Binding IsAbortButtonVisible}" Command="{Binding AbortCommand}"/>
             </StackLayout>
 
             <Label Margin="0,10,0,0" FontSize="Micro" TextColor="Gray" Text="Connect to your NZBGet Server. Please provide the Domain without http, default Port is 6789."/>
