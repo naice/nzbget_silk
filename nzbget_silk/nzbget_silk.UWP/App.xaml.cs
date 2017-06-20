@@ -46,7 +46,6 @@ namespace nzbget_silk.UWP
 
         private void OnLaunched(IActivatedEventArgs activated, string arguments)
         {
-
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {

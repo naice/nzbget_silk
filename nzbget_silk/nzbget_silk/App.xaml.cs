@@ -78,7 +78,7 @@ namespace nzbget_silk
                 // connect to server.
                 await MainPage.Navigation.PushAsync(
                     new AddServerPage(true,
-                        new Model.NZBGetServer() { Domain = "emmuss.ddns.net", Password = "jensm1985", Port = 6789, Username = "nzbget" },
+                        null,
                         async (newServer) =>
                         {
                             // this promise will be executed if a connection was made.

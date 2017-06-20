@@ -90,6 +90,23 @@ namespace nzbget_silk.Service
                 return null;
             }
         }
+        public const string EDIT_Q_GROUP_DELETE = "GroupFinalDelete";
+        public const string EDIT_Q_GROUP_MOVETOP = "GroupMoveTop";
+        public async Task<Model.JsonRPCResult<bool>> EditQueue(string command, string param, params int[] ids)
+        {
+            try
+            {
+                return await JsonRequest.Post<Model.JsonRPCResult<bool>>(Url(),
+                    new Model.JsonRPCCall("editqueue", command, param, ids));
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
+        
 
     }
 }

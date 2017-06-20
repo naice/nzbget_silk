@@ -10,7 +10,6 @@ namespace nzbget_silk.ViewModel
 {
     public class MainPageViewModel : PageViewModel
     {
-
         private bool _IsNameVisible;
         public bool IsNameVisible
         {
@@ -225,7 +224,7 @@ namespace nzbget_silk.ViewModel
                 var group = this.Groups.FirstOrDefault(g => g.NZBID == newGroup.NZBID);
                 if (group == null)
                 {
-                    this.Groups.Add(NZBGroupViewModel.Create(newGroup));
+                    this.Groups.Add(NZBGroupViewModel.Create(newGroup, _server));
                 }
                 else
                 {
@@ -233,17 +232,14 @@ namespace nzbget_silk.ViewModel
                 }
             }
         }
-
-
-
+        
         public void Update(JsonRPCStatus status)
         {
             long freeDiskSpace = Tools.DoubleInt2Long((int)status.FreeDiskSpaceLo, (int)status.FreeDiskSpaceHi);
             long downloadedSize = Tools.DoubleInt2Long((int)status.DownloadedSizeLo, (int)status.DownloadedSizeHi);
             long remainingSize = Tools.DoubleInt2Long((int)status.RemainingSizeLo, (int)status.RemainingSizeHi);
             long totalDownloadedSize = downloadedSize + remainingSize;
-
-
+            
             TotalDownloadProgress = (double)downloadedSize / (double)totalDownloadedSize;
             TotalDownloadProgressText = 
                 Tools.GetBytesReadable(downloadedSize) + 

@@ -158,12 +158,15 @@
     </ImageAsset>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\ico_arrow-up.png" />
     <Content Include="Images\ico_done.png" />
     <Content Include="Images\ico_downloading.png" />
     <Content Include="Images\ico_pause.png" />
     <Content Include="Images\ico_queued.png" />
+    <Content Include="Images\ico_remove.png" />
     <Content Include="Images\ico_reparing.png" />
     <Content Include="Images\ico_unpacking.png" />
+    <BundleResource Include="Images\servers.jpg" />
     <Content Include="Images\triangle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

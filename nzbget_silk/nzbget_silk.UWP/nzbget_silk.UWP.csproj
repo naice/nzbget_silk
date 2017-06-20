@@ -109,12 +109,15 @@
     <None Include="nzbget_silk.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\ico_arrow-up.png" />
     <Content Include="Images\ico_done.png" />
     <Content Include="Images\ico_downloading.png" />
     <Content Include="Images\ico_pause.png" />
     <Content Include="Images\ico_queued.png" />
     <Content Include="Images\ico_reparing.png" />
     <Content Include="Images\ico_unpacking.png" />
+    <Content Include="Images\ico_remove.png" />
+    <Content Include="Images\servers.jpg" />
     <Content Include="Images\triangle.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />

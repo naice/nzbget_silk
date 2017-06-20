@@ -7,9 +7,9 @@
              x:Class="nzbget_silk.MainPage" Title="{Binding Title}" Appearing="ContentPage_Appearing" Disappearing="ContentPage_Disappearing">
 
     <ScrollView>
-        <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Vertical" Spacing="0">
             <StackLayout Orientation="Vertical" Margin="{DynamicResource MediumSpacing}">
-                <Label Text="{Binding Name}" Style="{DynamicResource ListItemDetailValueTextStyle}"
+                <Label Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}"
                        HorizontalOptions="Center" IsVisible="{Binding IsNameVisible}" />
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Domain" Style="{DynamicResource ListItemDetailTextStyle}"/>
@@ -42,24 +42,43 @@
             </StackLayout>
             <controls:SectionDivider/>
             <controls:RepeaterView  x:TypeArguments="vm:NZBGroupViewModel"
-                                    ItemsSource="{Binding Groups}">
+                                    ItemsSource="{Binding Groups}"
+                                    ItemCreated="RepeaterView_ItemCreated">
                 <controls:RepeaterView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Orientation="Vertical">
-                            <StackLayout Orientation="Horizontal" Margin="{DynamicResource MediumSpacing}">
-                                <Image Source="{Binding StatusImageSource}" VerticalOptions="Center"/>
-                                <StackLayout Orientation="Vertical" Margin="8,0,0,0" HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}"/>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Download" Style="{DynamicResource ListItemDetailTextStyle}"/>
-                                        <Label Text="{Binding TotalSizeText}" Style="{DynamicResource ListItemDetailValueTextStyle}"
-                                               HorizontalOptions="EndAndExpand"/>
+                        <Grid BackgroundColor="White">
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal" Margin="{DynamicResource MediumSpacing}">
+                                    <Image Source="{Binding StatusImageSource}" VerticalOptions="Center"/>
+                                    <StackLayout Orientation="Vertical" Margin="8,0,0,0" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}"/>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding StatusText}" Style="{DynamicResource ListItemDetailTextStyle}"/>
+                                            <Label Text="{Binding TotalSizeText}" Style="{DynamicResource ListItemDetailValueTextStyle}"
+                                                   HorizontalOptions="EndAndExpand"/>
+                                        </StackLayout>
+                                        <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding IsProgressVisible}"/>
                                     </StackLayout>
-                                    <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding IsProgressVisible}"/>
+                                    <BoxView BackgroundColor="{Binding HealthColor}" HeightRequest="32" WidthRequest="5"></BoxView>
+                                </StackLayout>
+                                <controls:SectionDivider/>
+                            </StackLayout>
+                            <StackLayout x:Name="ContextMenuView" Orientation="Horizontal" Spacing="0"
+                                         HorizontalOptions="End" Opacity="0">
+                                <controls:SectionDividerVertical/>
+                                <StackLayout Orientation="Horizontal" Spacing="{DynamicResource MediumSpacing}"
+                                             Padding="{DynamicResource MediumSpacing}" BackgroundColor="WhiteSmoke">
+                                    <StackLayout.Margin>
+                                        <OnPlatform x:TypeArguments="Thickness" iOS="0,0,0,0.5" Android="0,0,0,1" WinPhone="0,0,0,1"/>
+                                    </StackLayout.Margin>
+                                    <Button Image="Images/ico_arrow-up.png" Command="{Binding MoveToTopCommand}" 
+                                            BackgroundColor="#CECECE" />
+                                    <Button Image="Images/ico_remove.png" Command="{Binding DeleteCommand}" 
+                                            BackgroundColor="#FF8577" TextColor="#FF0000"/>
+
                                 </StackLayout>
                             </StackLayout>
-                            <controls:SectionDivider/>
-                        </StackLayout>
+                        </Grid>
                     </DataTemplate>
                 </controls:RepeaterView.ItemTemplate>
                 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace nzbget_silk
 {
@@ -54,7 +55,7 @@ namespace nzbget_silk
             // Divide by 1024 to get fractional value
             readable = (readable / 1024);
             // Return formatted number with suffix
-            return readable.ToString("0.### ") + suffix;
+            return readable.ToString("0.00 ") + suffix;
         }
 
         public static long MegabyteToByte(long mb) => mb * 1024 * 1024;
@@ -64,6 +65,34 @@ namespace nzbget_silk
             b = b << 32;
             b = b | (uint)a1;
             return b;
+        }
+        public static Color InterpolateColor(Color[] colors, double x)
+        {
+            double r = 0.0, g = 0.0, b = 0.0;
+            double total = 0.0;
+            double step = 1.0 / (double)(colors.Length - 1);
+            double mu = 0.0;
+            double sigma_2 = 0.035;
+            x = x > 1 ? 1 : x < 0 ? 0 : x;
+
+            foreach (Color color in colors)
+            {
+                total += Math.Exp(-(x - mu) * (x - mu) / (2.0 * sigma_2)) / Math.Sqrt(2.0 * Math.PI * sigma_2);
+                mu += step;
+            }
+
+            mu = 0.0;
+            foreach (Color color in colors)
+            {
+                double percent = Math.Exp(-(x - mu) * (x - mu) / (2.0 * sigma_2)) / Math.Sqrt(2.0 * Math.PI * sigma_2);
+                mu += step;
+
+                r += color.R * percent / total;
+                g += color.G * percent / total;
+                b += color.B * percent / total;
+            }
+
+            return new Color(r, g, b);
         }
     }
 }
