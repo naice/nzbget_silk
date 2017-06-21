@@ -14,18 +14,13 @@ namespace nzbget_silk
     {
         ViewModel.SendNZBViewModel ViewModel { get { return BindingContext as ViewModel.SendNZBViewModel; } }
 
-        public SendNZBPage(string fileName, byte[] fileContent)
+        public SendNZBPage()
         {
             InitializeComponent();
-
-            BindingContext = new ViewModel.SendNZBViewModel(fileName, fileContent);
         }
 
         private async void Send_Clicked(object sender, EventArgs e)
         {
-            await ViewModel.Send();
-
-            Navigation.RemovePage(this);
         }
     }
 }

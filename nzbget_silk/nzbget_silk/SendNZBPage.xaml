@@ -5,10 +5,13 @@
     <StackLayout Margin="10" Orientation="Vertical">
 
         <Label Text="{Binding Description}" FontSize="Small" TextColor="Gray"/>
-        <Button Text="Send" HorizontalOptions="Center" VerticalOptions="Center" Clicked="Send_Clicked"/>
-        <ActivityIndicator IsRunning="True" IsVisible="{Binding IsIndicatorVisible}"
-                           HorizontalOptions="Center" VerticalOptions="Center"/>
-
+        <Button Text="Send" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding SendCommand}"/>
+        <Grid>
+            <Image Source="{Binding ResultImagePath}" Aspect="AspectFill"
+                               HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ActivityIndicator IsRunning="True" IsVisible="{Binding IsIndicatorVisible}"
+                               HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
 
     </StackLayout>
 </ContentPage>

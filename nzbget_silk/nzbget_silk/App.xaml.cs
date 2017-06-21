@@ -11,18 +11,19 @@ namespace nzbget_silk
     {
         public static App CurrentApp => Current as App;
         public Model.Storage GlobalStorage => new Model.Storage("config", PCLStorage.FileSystem.Current);
+        public ViewModel.Navigator Navigator { private set; get; }
 
         private Model.NZBFile _nzbFile = null;
         private bool _isInitAsyncDone = false;
 
         public App()
         {
-            //_CurrentFileSystem = currentFileSystem;
-
             InitializeComponent();
 
             var startPage = new StartPage();
             MainPage = new NavigationPage(startPage);
+            Navigator = new ViewModel.Navigator(MainPage.Navigation);
+
             InitializeAsync(startPage);
         }
 
@@ -47,8 +48,8 @@ namespace nzbget_silk
                         Device.BeginInvokeOnMainThread(async () =>
                         {
                             // show upload for nzb file
-                            await MainPage.Navigation.PushAsync(
-                                new SendNZBPage(_nzbFile.FileName, _nzbFile.FileContent));
+                            await Navigator.Push<SendNZBPage, ViewModel.SendNZBViewModel>(
+                                _nzbFile.FileName, _nzbFile.FileContent);
                         });
 
                         isProcessingStartupNZBFile = false;
@@ -57,16 +58,12 @@ namespace nzbget_silk
                 }
             });
         }
-
-        public async Task<bool> HasCurrentServer()
+        
+        async void OnFirstNewServerCreated(Model.NZBGetServer server)
         {
-            bool hasCurrentServer = false;
-
-            await GlobalStorage.Perform((data) => hasCurrentServer = data.CurrentServer != null);
-
-            return hasCurrentServer;
+            await Navigator.Push<MainPage, ViewModel.MainPageViewModel>(server);
+            _isInitAsyncDone = true;
         }
-
         async void InitializeAsync(Page startPage)
         {
             // Navigate to a apropriate landing page after launch.
@@ -76,27 +73,19 @@ namespace nzbget_silk
             if (server == null)
             {
                 // connect to server.
-                await MainPage.Navigation.PushAsync(
-                    new AddServerPage(true,
-                        null,
-                        async (newServer) =>
-                        {
-                            // this promise will be executed if a connection was made.
-                            await MainPage.Navigation.PushAsync(new MainPage(newServer));
-                            _isInitAsyncDone = true;
-                        }));
+                Action<Model.NZBGetServer> onFirstNewServerCreated = OnFirstNewServerCreated;
+                await Navigator.Push<AddServerPage, ViewModel.AddServerViewModel>(
+                    true, null, onFirstNewServerCreated);
             }
             else
             {
                 // show mainpage
-                await MainPage.Navigation.PushAsync(
-                    new MainPage(server));
-
+                await Navigator.Push<MainPage, ViewModel.MainPageViewModel>(server);
                 _isInitAsyncDone = true;
             }
 
             // remove the startPage from Navigation stack.
-            MainPage.Navigation.RemovePage(startPage);
+            Navigator.Remove(startPage);
         }
 
         protected override void OnStart()

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace nzbget_silk.ViewModel
 {

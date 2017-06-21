@@ -3,24 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace nzbget_silk.ViewModel
 {
     public class SendNZBViewModel : PageViewModel
     {
-        private bool _IsSendButtonEnabled = true;
-        public bool IsSendButtonEnabled
-        {
-            get { return _IsSendButtonEnabled; }
-            set
-            {
-                if (value != _IsSendButtonEnabled)
-                {
-                    _IsSendButtonEnabled = value;
-                    RaisePropertyChanged("IsSendButtonEnabled");
-                }
-            }
-        }
         private string _Description;
         public string Description
         {
@@ -47,6 +35,20 @@ namespace nzbget_silk.ViewModel
                 }
             }
         }
+        private string _ResultImagePath;
+        public string ResultImagePath
+        {
+            get { return _ResultImagePath; }
+            set
+            {
+                if (value != _ResultImagePath)
+                {
+                    _ResultImagePath = value;
+                    RaisePropertyChanged(nameof(ResultImagePath));
+                }
+            }
+        }
+        public RelayCommand SendCommand { get; private set; }
 
         private readonly string _fileName;
         private readonly byte[] _fileContent;
@@ -59,11 +61,13 @@ namespace nzbget_silk.ViewModel
 
             _fileContent = fileContent;
             _fileName = fileName;
+            SendCommand = new RelayCommand(() => SendExecute());
         }
 
-        public async Task<bool> Send()
+        public async void SendExecute()
         {
-            IsSendButtonEnabled = false;
+            ResultImagePath = null;
+            SendCommand.IsEnabled = false;
             IsIndicatorVisible = true;
 
             Service.NZBGetService service = null;
@@ -72,10 +76,21 @@ namespace nzbget_silk.ViewModel
             var result = await service.Append(_fileName, _fileContent);
             bool success = result != null && result.result == 0;
 
-            IsIndicatorVisible = false;
-            IsSendButtonEnabled = true;
+            if (success)
+            {
+                ResultImagePath = "Images/SendNZBSuccess.png";
 
-            return success;
+                await Task.Delay(500).ConfigureAwait(true);
+
+                Navigator.Remove(Page);
+            }
+            else
+            {
+                ResultImagePath = "Images/SendNZBFailure.png";
+            }
+
+            IsIndicatorVisible = false;
+            SendCommand.IsEnabled = true;
         }
     }
 }

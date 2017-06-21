@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace nzbget_silk.ViewModel
 {
@@ -22,22 +23,51 @@ namespace nzbget_silk.ViewModel
                 }
             }
         }
-        
-        /// <summary>
-        /// Page.
-        /// </summary>
-        protected Xamarin.Forms.Page Page { private set; get; }
-        private bool isInitLazyDone = false;
-        private bool isInitLazy = false;
 
-        public PageViewModel(Xamarin.Forms.Page page)
+
+        private bool _IsInitializingLazy;
+        /// <summary>
+        /// Inidicator when InitLazy() is processing.
+        /// </summary>
+        public bool IsInitializingLazy
         {
-            Page = page ?? throw new ArgumentNullException(nameof(page));
-            Page.Disappearing += Page_Disappearing;
-            Page.Appearing += Page_Appearing;
-            Init();
+            get { return _IsInitializingLazy; }
+            set
+            {
+                if (value != _IsInitializingLazy)
+                {
+                    _IsInitializingLazy = value;
+                    RaisePropertyChanged(nameof(IsInitializingLazy));
+                }
+            }
+        }
+        
+        private Page _Page;
+        /// <summary>
+        /// The Page that this VM was initially bound to.
+        /// </summary>
+        public Page Page
+        {
+            get { return _Page; }
+            private set
+            {
+                if (value != _Page)
+                {
+                    _Page = value ?? throw new ArgumentException(nameof(Page));
+                    _Page.Disappearing += Page_Disappearing;
+                    _Page.Appearing += Page_Appearing;
+                }
+            }
         }
 
+        /// <summary>
+        /// The Navigator. Initialized AFTER construction. (not available in Init())
+        /// </summary>
+        public Navigator Navigator { private set; get; }
+
+        private bool isInitLazyDone = false;
+        private bool isInitLazy = false;
+        
         private async void Page_Appearing(object sender, EventArgs e)
         {
             if (sender != Page) throw new Exception("UNEXPECTED BEHAVIOR");
@@ -45,7 +75,9 @@ namespace nzbget_silk.ViewModel
             if (!isInitLazy)
             {
                 isInitLazy = true;
+                IsInitializingLazy = true;
                 await InitLazy().ConfigureAwait(true);
+                IsInitializingLazy = false;
                 isInitLazyDone = true;
             }
 
@@ -61,11 +93,7 @@ namespace nzbget_silk.ViewModel
 
             OnDisappearing();
         }
-
-        /// <summary>
-        /// Called from constructor after Init and hooking events.
-        /// </summary>
-        protected virtual void Init() { }
+        
         /// <summary>
         /// Called once before OnApprearing 
         /// </summary>

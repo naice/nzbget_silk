@@ -12,10 +12,9 @@ namespace nzbget_silk
     {
         private readonly TapGestureRecognizer _groupItemTapGestureRecognizer;
 
-        public MainPage(Model.NZBGetServer server)
+        public MainPage()
         {
             InitializeComponent();
-            BindingContext = new ViewModel.MainPageViewModel(server);
             _groupItemTapGestureRecognizer = new TapGestureRecognizer();
             _groupItemTapGestureRecognizer.Tapped += (s,e)=> RepeaterView_ItemTapped(s as View, (s as View).BindingContext);
         }

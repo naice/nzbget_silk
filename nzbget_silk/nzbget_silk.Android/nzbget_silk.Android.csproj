@@ -134,6 +134,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\download_background.png" />
     <Content Include="Images\ico_arrow-up.png" />
     <Content Include="Images\ico_done.png" />
     <Content Include="Images\ico_downloading.png" />
@@ -142,6 +143,8 @@
     <Content Include="Images\ico_remove.png" />
     <Content Include="Images\ico_reparing.png" />
     <Content Include="Images\ico_unpacking.png" />
+    <Content Include="Images\SendNZBFailure.png" />
+    <Content Include="Images\SendNZBSuccess.png" />
     <Content Include="Images\servers.jpg" />
     <Content Include="Images\triangle.png" />
   </ItemGroup>

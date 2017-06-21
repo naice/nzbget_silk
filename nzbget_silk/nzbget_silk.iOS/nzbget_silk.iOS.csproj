@@ -158,6 +158,7 @@
     </ImageAsset>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\download_background.png" />
     <Content Include="Images\ico_arrow-up.png" />
     <Content Include="Images\ico_done.png" />
     <Content Include="Images\ico_downloading.png" />
@@ -167,6 +168,8 @@
     <Content Include="Images\ico_reparing.png" />
     <Content Include="Images\ico_unpacking.png" />
     <BundleResource Include="Images\servers.jpg" />
+    <Content Include="Images\SendNZBFailure.png" />
+    <Content Include="Images\SendNZBSuccess.png" />
     <Content Include="Images\triangle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

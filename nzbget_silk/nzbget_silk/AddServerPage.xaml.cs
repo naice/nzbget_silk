@@ -13,16 +13,10 @@ namespace nzbget_silk
     public partial class AddServerPage : ContentPage
     {
         public ViewModel.AddServerViewModel ViewModel => BindingContext as ViewModel.AddServerViewModel;
-
-        private readonly Action<Model.NZBGetServer> _promise;
-
-        public AddServerPage(bool forceCreation, Model.NZBGetServer server = null, Action<Model.NZBGetServer> promise = null)
+        
+        public AddServerPage()
         {
-            _promise = promise;
-
             InitializeComponent();
-
-            BindingContext = new ViewModel.AddServerViewModel(forceCreation, server, promise);
         }
     }
 }
