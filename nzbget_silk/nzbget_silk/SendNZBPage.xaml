@@ -9,7 +9,7 @@
             <Label FormattedText="{Binding Description}" FontSize="Small" TextColor="Gray" HorizontalOptions="Center"/>
             <Button Text="Send" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding SendCommand}"/>
             <Grid>
-                <Image Source="{Binding ResultImagePath}" Aspect="AspectFill"
+                <Image Source="{Binding ResultImagePath}" Aspect="AspectFill" WidthRequest="64" HeightRequest="64"
                                    HorizontalOptions="Center" VerticalOptions="Center"/>
                 <ActivityIndicator IsRunning="True" IsVisible="{Binding IsIndicatorVisible}"
                                    HorizontalOptions="Center" VerticalOptions="Center"/>
