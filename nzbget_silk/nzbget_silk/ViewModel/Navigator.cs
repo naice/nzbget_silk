@@ -47,22 +47,17 @@ namespace nzbget_silk.ViewModel
         {
             // Construct Page and Model
             TPage page = Activator.CreateInstance<TPage>();
-            var pageViewModel = Activator.CreateInstance(typeof(TViewModel), args);
+            var pageViewModel = Activator.CreateInstance(typeof(TViewModel), args) as PageViewModel;
 
-            // Inject Page.
-            Inject(pageViewModel, nameof(PageViewModel.Page), page);
-            // Inject Navigator.
-            Inject(pageViewModel, nameof(PageViewModel.Navigator), nav);
+            if (pageViewModel == null)
+                throw new InvalidOperationException($"{typeof(TViewModel).ToString()} have to derive from {nameof(PageViewModel)} in order to work properly.");
+
+            // Register / Inject dependency
+            pageViewModel.Register(page, nav);
 
             // Bind ViewModel to Page.
             page.BindingContext = pageViewModel;
             return page;
-        }
-
-        private static void Inject(object @in, string name, object value)
-        {
-            var type = @in.GetType();
-            type.GetRuntimeProperty(name).SetValue(@in, value);
         }
     }
 }

@@ -9,8 +9,8 @@ namespace nzbget_silk.ViewModel
 {
     public class SendNZBViewModel : PageViewModel
     {
-        private string _Description;
-        public string Description
+        private FormattedString _Description;
+        public FormattedString Description
         {
             get { return _Description; }
             set
@@ -57,7 +57,10 @@ namespace nzbget_silk.ViewModel
         {
             Title = "Upload";
 
-            Description = $"{System.IO.Path.GetFileNameWithoutExtension(fileName)} @ {Tools.GetBytesReadable(fileContent.Length)}";
+            var fs = new FormattedString();
+            fs.Spans.Add(new Span { Text = System.IO.Path.GetFileNameWithoutExtension(fileName) });
+            fs.Spans.Add(new Span { Text = $" @ {Tools.GetBytesReadable(fileContent.Length)}", FontAttributes = FontAttributes.Bold });
+            Description = fs;
 
             _fileContent = fileContent;
             _fileName = fileName;
@@ -70,17 +73,22 @@ namespace nzbget_silk.ViewModel
             SendCommand.IsEnabled = false;
             IsIndicatorVisible = true;
 
-            Service.NZBGetService service = null;
-            await App.CurrentApp.GlobalStorage.Perform((data) => service = new Service.NZBGetService(data.CurrentServer));
+            await Task.Delay(500).ConfigureAwait(true);
 
-            var result = await service.Append(_fileName, _fileContent);
-            bool success = result != null && result.result == 0;
+            Service.NZBGetService service = null;
+            await App.CurrentApp.GlobalStorage.Perform(
+                (data) => service = new Service.NZBGetService(data.CurrentServer)).ConfigureAwait(true);
+
+            var result = await service.Append(_fileName, _fileContent).ConfigureAwait(true);
+            bool success = result != null && result.result > 0;
+
+            //await Page.DisplayAlert("result", Newtonsoft.Json.JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented), "Ok");
 
             if (success)
             {
                 ResultImagePath = "Images/SendNZBSuccess.png";
 
-                await Task.Delay(500).ConfigureAwait(true);
+                await Task.Delay(1000).ConfigureAwait(true);
 
                 Navigator.Remove(Page);
             }

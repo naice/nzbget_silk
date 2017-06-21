@@ -2,16 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="nzbget_silk.SendNZBPage" Title="{Binding Title}">
-    <StackLayout Margin="10" Orientation="Vertical">
+    <Grid>
+        <Image Source="Images/download_background.png" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
+        <StackLayout Margin="10" Orientation="Vertical">
 
-        <Label Text="{Binding Description}" FontSize="Small" TextColor="Gray"/>
-        <Button Text="Send" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding SendCommand}"/>
-        <Grid>
-            <Image Source="{Binding ResultImagePath}" Aspect="AspectFill"
-                               HorizontalOptions="Center" VerticalOptions="Center"/>
-            <ActivityIndicator IsRunning="True" IsVisible="{Binding IsIndicatorVisible}"
-                               HorizontalOptions="Center" VerticalOptions="Center"/>
-        </Grid>
+            <Label FormattedText="{Binding Description}" FontSize="Small" TextColor="Gray" HorizontalOptions="Center"/>
+            <Button Text="Send" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding SendCommand}"/>
+            <Grid>
+                <Image Source="{Binding ResultImagePath}" Aspect="AspectFill"
+                                   HorizontalOptions="Center" VerticalOptions="Center"/>
+                <ActivityIndicator IsRunning="True" IsVisible="{Binding IsIndicatorVisible}"
+                                   HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Grid>
 
-    </StackLayout>
+        </StackLayout>
+    </Grid>
 </ContentPage>

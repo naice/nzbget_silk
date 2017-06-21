@@ -18,9 +18,5 @@ namespace nzbget_silk
         {
             InitializeComponent();
         }
-
-        private async void Send_Clicked(object sender, EventArgs e)
-        {
-        }
     }
 }

@@ -93,6 +93,13 @@ namespace nzbget_silk.ViewModel
 
             OnDisappearing();
         }
+
+        internal void Register(Page page, Navigator navigator)
+        {
+            if (Page != null) throw new InvalidOperationException("Already Registered "+GetType().ToString());
+            Page = page;
+            Navigator = navigator;
+        }
         
         /// <summary>
         /// Called once before OnApprearing 
