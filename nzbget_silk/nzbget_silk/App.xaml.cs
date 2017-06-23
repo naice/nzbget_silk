@@ -10,19 +10,24 @@ namespace nzbget_silk
     public partial class App : Application
     {
         public static App CurrentApp => Current as App;
-        public Model.Storage GlobalStorage => new Model.Storage("config", PCLStorage.FileSystem.Current);
-        public ViewModel.Navigator Navigator { private set; get; }
+        public NcodedXMobile.Model.Storage<Model.StorageAppSettings> GlobalStorage =>
+            new NcodedXMobile.Model.Storage<Model.StorageAppSettings>("config");
+        public NcodedXMobile.ViewModel.Navigator Navigator { private set; get; }
 
         private Model.NZBFile _nzbFile = null;
         private bool _isInitAsyncDone = false;
 
         public App()
         {
+            NcodedXMobile.Configuration.Begin()
+                .Set(new StorageIO())
+                .Set(new JsonConvert());
+
             InitializeComponent();
 
             var startPage = new StartPage();
             MainPage = new NavigationPage(startPage);
-            Navigator = new ViewModel.Navigator(MainPage.Navigation);
+            Navigator = new NcodedXMobile.ViewModel.Navigator(MainPage.Navigation);
 
             InitializeAsync(startPage);
         }

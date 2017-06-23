@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NcodedXMobile.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,7 +60,7 @@ namespace nzbget_silk.ViewModel
 
             var fs = new FormattedString();
             fs.Spans.Add(new Span { Text = System.IO.Path.GetFileNameWithoutExtension(fileName) });
-            fs.Spans.Add(new Span { Text = $" @ {Tools.GetBytesReadable(fileContent.Length)}", FontAttributes = FontAttributes.Bold });
+            fs.Spans.Add(new Span { Text = $" @ {NcodedXMobile.Toolbox.Toolbox.ByteCountToReadableString(fileContent.Length)}", FontAttributes = FontAttributes.Bold });
             Description = fs;
 
             _fileContent = fileContent;

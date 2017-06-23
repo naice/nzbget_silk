@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:nzbget_silk"
              xmlns:controls="clr-namespace:nzbget_silk.Controls"
+             xmlns:controls2="clr-namespace:NcodedXMobile.Controls;assembly=NcodedXMobile"
              xmlns:vm="clr-namespace:nzbget_silk.ViewModel"
              x:Class="nzbget_silk.MainPage" Title="{Binding Title}" Appearing="ContentPage_Appearing" Disappearing="ContentPage_Disappearing">
 
@@ -41,10 +42,10 @@
                 <Button Text="{Binding ToggleDownloadButtonText}" Command="{Binding ToggleDownloadButtonCommand}"/>
             </StackLayout>
             <controls:SectionDivider/>
-            <controls:RepeaterView  x:TypeArguments="vm:NZBGroupViewModel"
+            <controls2:RepeaterView  x:TypeArguments="vm:NZBGroupViewModel"
                                     ItemsSource="{Binding Groups}"
                                     ItemCreated="RepeaterView_ItemCreated">
-                <controls:RepeaterView.ItemTemplate>
+                <controls2:RepeaterView.ItemTemplate>
                     <DataTemplate>
                         <Grid BackgroundColor="White">
                             <StackLayout Orientation="Vertical">
@@ -80,9 +81,8 @@
                             </StackLayout>
                         </Grid>
                     </DataTemplate>
-                </controls:RepeaterView.ItemTemplate>
-                
-            </controls:RepeaterView>
+                </controls2:RepeaterView.ItemTemplate>                
+            </controls2:RepeaterView>
             <BoxView HeightRequest="20" MinimumHeightRequest="20" />
         </StackLayout>
     </ScrollView>

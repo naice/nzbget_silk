@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using NcodedXMobile.ViewModel;
 
 namespace nzbget_silk.ViewModel
 {
@@ -242,18 +243,18 @@ namespace nzbget_silk.ViewModel
             long totalDownloadedSize = downloadedSize + remainingSize;
             
             TotalDownloadProgress = (double)downloadedSize / (double)totalDownloadedSize;
-            TotalDownloadProgressText = 
-                Tools.GetBytesReadable(downloadedSize) + 
-                " / " + 
-                Tools.GetBytesReadable(totalDownloadedSize);
-            DownloadSpeedText = Tools.GetBytesReadable(status.DownloadRate) + "/s";
+            TotalDownloadProgressText =
+                NcodedXMobile.Toolbox.Toolbox.ByteCountToReadableString(downloadedSize) + 
+                " / " +
+                NcodedXMobile.Toolbox.Toolbox.ByteCountToReadableString(totalDownloadedSize);
+            DownloadSpeedText = NcodedXMobile.Toolbox.Toolbox.ByteCountToReadableString(status.DownloadRate) + "/s";
 
             if (status.DownloadLimit > 0)
-                DownloadLimitText = Tools.GetBytesReadable(status.DownloadLimit) + "/s";
+                DownloadLimitText = NcodedXMobile.Toolbox.Toolbox.ByteCountToReadableString(status.DownloadLimit) + "/s";
             else
                 DownloadLimitText = "no Limit";
 
-            FreeDiskSpaceText = Tools.GetBytesReadable(freeDiskSpace);
+            FreeDiskSpaceText = NcodedXMobile.Toolbox.Toolbox.ByteCountToReadableString(freeDiskSpace);
 
             _isDownloading = status.DownloadPaused == false;
             ToggleDownloadButtonText = _isDownloading ? "Pause Download" : "Start Download";

@@ -1,4 +1,5 @@
-﻿using nzbget_silk.Controls;
+﻿using NcodedXMobile.Controls;
+using nzbget_silk.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
