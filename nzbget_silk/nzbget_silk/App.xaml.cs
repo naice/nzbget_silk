@@ -19,6 +19,7 @@ namespace nzbget_silk
 
         public App()
         {
+            // setup default dependencys for NcodedXMoblie Framework.
             NcodedXMobile.Configuration.Begin()
                 .Set(new StorageIO())
                 .Set(new JsonConvert());

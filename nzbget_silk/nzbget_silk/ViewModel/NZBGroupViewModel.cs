@@ -199,7 +199,6 @@ namespace nzbget_silk.ViewModel
         }
 
         private readonly Model.NZBGetServer _server;
-        private GroupStatus _status;
 
         public NZBGroupViewModel(long NZBID, Model.NZBGetServer server)
         {
@@ -280,13 +279,13 @@ namespace nzbget_silk.ViewModel
             StatusImageSource = $"Images/ico_{StatusText.ToLower()}.png";
             var health = (double)group.Health / 1000d;
             Health = health > 1 ? 1 : health < 0 ? 0 : health;
-            HealthColor = Tools.InterpolateColor(
+            HealthColor = NcodedXMobile.Toolbox.Toolbox.InterpolateColor(
                 new Color[] { Color.Red, Color.Yellow, Color.Green }, 
                 Health);
             TotalSize = fileSize - pausedSize;
-            TotalSizeText = Tools.GetBytesReadable(TotalSize);
+            TotalSizeText = NcodedXMobile.Toolbox.Toolbox.ByteCountToReadableString(TotalSize);
             RemainingSize = remainingSize - pausedSize;
-            RemainingSizeText = Tools.GetBytesReadable(RemainingSize);
+            RemainingSizeText = NcodedXMobile.Toolbox.Toolbox.ByteCountToReadableString(RemainingSize);
             long downloadedSize = TotalSize - RemainingSize;
 
             if (Status == GroupStatus.Downloading)
