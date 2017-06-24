@@ -166,6 +166,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\#libs\NcodedXMobile\NcodedXMobile\NcodedXMobile.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>NcodedXMobile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\nzbget_silk\nzbget_silk.csproj">
       <Project>{bb605f5a-19ed-4c94-a938-494ed27683fa}</Project>
       <Name>nzbget_silk</Name>
