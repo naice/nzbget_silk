@@ -5,7 +5,11 @@
              xmlns:controls="clr-namespace:nzbget_silk.Controls"
              xmlns:controls2="clr-namespace:NcodedXMobile.Controls;assembly=NcodedXMobile"
              xmlns:vm="clr-namespace:nzbget_silk.ViewModel"
-             x:Class="nzbget_silk.MainPage" Title="{Binding Title}" Appearing="ContentPage_Appearing" Disappearing="ContentPage_Disappearing">
+             x:Class="nzbget_silk.MainPage" 
+             Title="{Binding Title}" 
+             Appearing="ContentPage_Appearing" 
+             Disappearing="ContentPage_Disappearing"
+             BackgroundColor="{DynamicResource Shade25}">
 
     <ScrollView>
         <StackLayout Orientation="Vertical" Spacing="0">
@@ -47,7 +51,8 @@
                                     ItemCreated="RepeaterView_ItemCreated">
                 <controls2:RepeaterView.ItemTemplate>
                     <DataTemplate>
-                        <Grid BackgroundColor="White">
+                        <Grid BackgroundColor="{DynamicResource Shade50}">
+                            <!-- ITEM -->
                             <StackLayout Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal" Margin="{DynamicResource MediumSpacing}">
                                     <Image Source="{Binding StatusImageSource}" VerticalOptions="Center"/>
@@ -64,11 +69,12 @@
                                 </StackLayout>
                                 <controls:SectionDivider/>
                             </StackLayout>
+                            <!-- CONTEXT MENU -->
                             <StackLayout x:Name="ContextMenuView" Orientation="Horizontal" Spacing="0"
                                          HorizontalOptions="End" Opacity="0">
                                 <controls:SectionDividerVertical/>
                                 <StackLayout Orientation="Horizontal" Spacing="{DynamicResource MediumSpacing}"
-                                             Padding="{DynamicResource MediumSpacing}" BackgroundColor="WhiteSmoke">
+                                             Padding="{DynamicResource MediumSpacing}" BackgroundColor="{DynamicResource Accent2}">
                                     <StackLayout.Margin>
                                         <OnPlatform x:TypeArguments="Thickness" iOS="0,0,0,0.5" Android="0,0,0,1" WinPhone="0,0,0,1"/>
                                     </StackLayout.Margin>

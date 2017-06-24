@@ -143,6 +143,8 @@
     <Content Include="Images\ico_remove.png" />
     <Content Include="Images\ico_reparing.png" />
     <Content Include="Images\ico_unpacking.png" />
+    <Content Include="Images\nzbget_silk_ico.png" />
+    <Content Include="Images\nzbget_silk_wide_logo.png" />
     <Content Include="Images\SendNZBFailure.png" />
     <Content Include="Images\SendNZBSuccess.png" />
     <Content Include="Images\servers.jpg" />

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="nzbget_silk.StartPage">
 
-    <Image Margin="20" Aspect="AspectFill" Source="Images/triangle.png"/>
+    <Image Margin="20" Aspect="AspectFill" Source="Images/nzbget_silk_ico.png" 
+           HorizontalOptions="Center" VerticalOptions="Center"/>
 
 </ContentPage>

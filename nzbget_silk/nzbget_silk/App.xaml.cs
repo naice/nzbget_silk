@@ -27,7 +27,7 @@ namespace nzbget_silk
             InitializeComponent();
 
             var startPage = new StartPage();
-            MainPage = new NavigationPage(startPage);
+            MainPage = new Frame(startPage) { };
             Navigator = new NcodedXMobile.ViewModel.Navigator(MainPage.Navigation);
 
             InitializeAsync(startPage);

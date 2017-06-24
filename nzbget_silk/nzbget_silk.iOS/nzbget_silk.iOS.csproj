@@ -168,6 +168,8 @@
     <Content Include="Images\ico_reparing.png" />
     <Content Include="Images\ico_unpacking.png" />
     <BundleResource Include="Images\servers.jpg" />
+    <BundleResource Include="Images\nzbget_silk_wide_logo.png" />
+    <BundleResource Include="Images\nzbget_silk_ico.png" />
     <Content Include="Images\SendNZBFailure.png" />
     <Content Include="Images\SendNZBSuccess.png" />
     <Content Include="Images\triangle.png" />

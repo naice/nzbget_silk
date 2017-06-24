@@ -41,12 +41,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ColorSet.cs" />
     <Compile Include="Controls\SectionDivider.xaml.cs">
       <DependentUpon>SectionDivider.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SectionDividerVertical.xaml.cs">
       <DependentUpon>SectionDividerVertical.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Frame.cs" />
     <Compile Include="JsonConvert.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
