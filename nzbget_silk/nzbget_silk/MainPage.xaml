@@ -13,6 +13,7 @@
 
     <ScrollView>
         <StackLayout Orientation="Vertical" Spacing="0">
+            <!-- SERVER STATUS -->
             <StackLayout Orientation="Vertical" Margin="{DynamicResource MediumSpacing}">
                 <Label Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}"
                        HorizontalOptions="Center" IsVisible="{Binding IsNameVisible}" />
@@ -46,16 +47,19 @@
                 <Button Text="{Binding ToggleDownloadButtonText}" Command="{Binding ToggleDownloadButtonCommand}"/>
             </StackLayout>
             <controls:SectionDivider/>
+            <!-- NZB GROUPS -->
             <controls2:RepeaterView  x:TypeArguments="vm:NZBGroupViewModel"
                                     ItemsSource="{Binding Groups}"
                                     ItemCreated="RepeaterView_ItemCreated">
                 <controls2:RepeaterView.ItemTemplate>
                     <DataTemplate>
-                        <Grid BackgroundColor="{DynamicResource Shade50}">
+                        <Grid x:Name="ItemCell" BackgroundColor="{DynamicResource Shade50}">
                             <!-- ITEM -->
                             <StackLayout Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal" Margin="{DynamicResource MediumSpacing}">
-                                    <Image Source="{Binding StatusImageSource}" VerticalOptions="Center"/>
+
+                                    <controls2:BlendImageView Source="{Binding StatusImageSource}" BlendColor="{DynamicResource PrimaryText}" VerticalOptions="Center" HeightRequest="32" WidthRequest="32"/>
+                                    <!--<Image Source="{Binding StatusImageSource}" VerticalOptions="Center"/>-->
                                     <StackLayout Orientation="Vertical" Margin="8,0,0,0" HorizontalOptions="FillAndExpand">
                                         <Label Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}"/>
                                         <StackLayout Orientation="Horizontal">
@@ -74,7 +78,7 @@
                                          HorizontalOptions="End" Opacity="0">
                                 <controls:SectionDividerVertical/>
                                 <StackLayout Orientation="Horizontal" Spacing="{DynamicResource MediumSpacing}"
-                                             Padding="{DynamicResource MediumSpacing}" BackgroundColor="{DynamicResource Accent2}">
+                                             Padding="{DynamicResource MediumSpacing}" BackgroundColor="{DynamicResource Shade75}">
                                     <StackLayout.Margin>
                                         <OnPlatform x:TypeArguments="Thickness" iOS="0,0,0,0.5" Android="0,0,0,1" WinPhone="0,0,0,1"/>
                                     </StackLayout.Margin>

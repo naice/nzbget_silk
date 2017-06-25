@@ -12,6 +12,7 @@
       <Color x:Key="Shade100">#3D445A</Color> <Color x:Key="PrimaryText">#3D445A</Color>
       <Color x:Key="Accent1">#A5738B</Color>
       <Color x:Key="Accent2">#F5D0C3</Color>
+      <Color x:Key="Success">#CCF4C3</Color>
 
       <Thickness x:Key="SmallPadding">4</Thickness>
       <Thickness x:Key="MediumPadding">8</Thickness>
@@ -36,15 +37,18 @@
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="Font" Value="Semibold"/>
+        <Setter Property="TextColor" Value="#3D445A"/>
       </Style>
       <Style x:Key="ListItemDetailTextStyle" TargetType="Label">
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Font" Value="Semibold"/>
+        <Setter Property="TextColor" Value="#3D445A"/>
       </Style>
       <Style x:Key="ListItemDetailValueTextStyle" TargetType="Label">
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="Font" Value="Semibold"/>
+        <Setter Property="TextColor" Value="#3D445A"/>
       </Style>
 
 

@@ -16,6 +16,7 @@ namespace nzbget_silk
         public static Color Shade100 { get { return GetRessource<Color>(); } }
         public static Color Accent1 { get { return GetRessource<Color>(); } }
         public static Color Accent2 { get { return GetRessource<Color>(); } }
+        public static Color Success { get { return GetRessource<Color>(); } }
 
         public static Color PrimaryText { get { return GetRessource<Color>(); } }
 

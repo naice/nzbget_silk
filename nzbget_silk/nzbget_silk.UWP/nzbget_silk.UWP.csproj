@@ -168,6 +168,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\#libs\NcodedXMobile\NcodedXMobile.UWP\NcodedXMobile.UWP.csproj">
+      <Project>{4643b51e-ddfd-4556-9df8-acb1ad085846}</Project>
+      <Name>NcodedXMobile.UWP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\#libs\NcodedXMobile\NcodedXMobile\NcodedXMobile.csproj">
       <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
       <Name>NcodedXMobile</Name>
